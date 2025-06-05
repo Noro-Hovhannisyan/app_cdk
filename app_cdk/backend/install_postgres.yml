@@ -1,0 +1,46 @@
+name: InstallPostgres14AndInitDB
+description: Install PostgreSQL 14, initialize DB, create user and database
+schemaVersion: 1.0
+
+phases:
+  - name: build
+    steps:
+      - name: EnableAmazonLinuxExtras
+        action: ExecuteBash
+        inputs:
+          commands:
+            - "amazon-linux-extras enable postgresql14"
+            - "yum clean metadata"
+
+      - name: InstallPostgres14
+        action: ExecuteBash
+        inputs:
+          commands:
+            - "yum install -y postgresql postgresql-server"
+
+      - name: InitPostgres
+        action: ExecuteBash
+        inputs:
+          commands:
+            - "postgresql-setup --initdb"
+            - "systemctl enable postgresql"
+            - "systemctl start postgresql"
+
+      - name: ConfigurePostgres
+        action: ExecuteBash
+        inputs:
+          commands:
+            - sed -i "s/^#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
+            - echo "host    all    all    0.0.0.0/0    md5" >> /var/lib/pgsql/data/pg_hba.conf
+            - systemctl restart postgresql
+
+      - name: CreateDatabaseAndUser
+        action: ExecuteBash
+        inputs:
+          commands:
+            - |
+              su - postgres -c "psql <<EOF
+              CREATE DATABASE \"task-db\";
+              CREATE USER taskuser WITH PASSWORD 'db-user-task';
+              GRANT ALL PRIVILEGES ON DATABASE \"task-db\" TO taskuser;
+              EOF"
