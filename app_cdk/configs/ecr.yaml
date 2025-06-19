@@ -1,0 +1,7 @@
+repos:
+  - name: "backend"
+    actions: [
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:BatchGetImage",
+                    "ecr:BatchCheckLayerAvailability"
+                ]

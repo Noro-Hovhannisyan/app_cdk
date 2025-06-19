@@ -1,0 +1,11 @@
+tgs:
+  - name: "backend-tg"
+    vpc_name: "task_vpc"
+    port: 80
+    protocol: "HTTP"
+    target_type: "INSTANCE"
+    path: "/health"
+    interval: 30
+    timeout: 5
+    healthy_threshold_count: 2
+    unhealthy_threshold_count: 2

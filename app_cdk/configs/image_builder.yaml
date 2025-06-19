@@ -1,0 +1,22 @@
+builders:
+  - name: "db_image"
+    assumed_by: "ec2.amazonaws.com"
+    managed_policies: "AmazonSSMManagedInstanceCore"
+    managed_policy_name: "EC2InstanceProfileForImageBuilder"
+    component_name: "InstallPostgres14AndInitDB"
+    platform: "Linux"
+    component_version: "1.0.0"
+    data: "app_cdk/backend/install_postgres.yml"
+    uri: None
+    recipe_name: "PostgresImageRecipe"
+    recipe_version: "1.0.0"
+    parent_image: "arn:aws:imagebuilder:eu-north-1:aws:image/amazon-linux-2-x86/x.x.x"
+    infra_name: "PostgresInfraConfig"
+    instance_types: ["t3.micro"]
+    subnet_id: "subnet-071792fd9b111f251"
+    security_group_ids: ["sg-0d9b439c32acef14c"]
+    terminate_instance_on_failure: True
+    pipeline_name: "PostgresImagePipeline"
+    status: "ENABLED"
+    pipeline_execution_start_condition: "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
+    schedule_expression: "cron(0 0 1 1 ? 2099)"

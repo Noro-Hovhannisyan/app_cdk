@@ -1,0 +1,14 @@
+functions:
+  - name: "invalidation_lambda"
+    runtime: "PYTHON_3_12"
+    handler: "cdn_invalidator.handler"
+    folder: "lambda"
+    timeout: 30
+    environment: {
+                   "DISTRIBUTION_ID": "E2MKEWDFBR7CPT"
+    }
+    actions: ["cloudfront:CreateInvalidation"]
+    resources: ["*"]
+    principal: "s3.amazonaws.com"
+    action: "lambda:InvokeFunction"
+    source_arn: "arn:aws:s3:::*"

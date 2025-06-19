@@ -1,0 +1,15 @@
+records:
+  - name: flask
+    hosted_zone_id: "Z03054271SZN0HSASJEI7"
+    zone_name: "academy.goya.am"
+    target_type: alb
+    load_balancer_arn: "arn:aws:elasticloadbalancing:eu-north-1:713767909258:loadbalancer/app/task-alb/123fc85d1eac5de9"
+    security_group_id: "sg-0a714d1c1fe6814ed"
+    load_balancer_canonical_hosted_zone_id: "Z23TAZ6LKFMNIO"
+    load_balancer_dns_name: "task-alb-2063978165.eu-north-1.elb.amazonaws.com"
+  - name: react
+    hosted_zone_id: "Z03054271SZN0HSASJEI7"
+    zone_name: "academy.goya.am"
+    target_type: cdn
+    domain_name: "d30k5le2rgnaqc.cloudfront.net"
+    distribution_id: "E2MKEWDFBR7CPT"

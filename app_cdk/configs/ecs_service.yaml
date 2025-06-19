@@ -1,0 +1,10 @@
+services:
+  - name: "backend_service"
+    vpc_name: "task_vpc"
+    cluster_name: "ecs-ec2-cluster"
+    task_definition_name: "backend"
+    target_group_arn: "arn:aws:elasticloadbalancing:eu-north-1:713767909258:targetgroup/backend-tg/9324bebe40161615"
+    task_definition_revision: LATEST
+    desired_count: 1
+    min_healthy_percent: 0
+    max_healthy_percent: 100

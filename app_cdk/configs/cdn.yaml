@@ -1,0 +1,12 @@
+distributions:
+  - name: "frontend"
+    acm:
+      hosted_zone_id: "Z03054271SZN0HSASJEI7"
+      zone_name: "academy.goya.am"
+      acm_id: "CDNCertificate"
+      domain_name: "react.academy.goya.am"
+      region: "us-east-1"
+    viewer_protocol_policy: "REDIRECT_TO_HTTPS"
+    default_root_object: "index.html"
+    domain_names: ["react.academy.goya.am"]
+

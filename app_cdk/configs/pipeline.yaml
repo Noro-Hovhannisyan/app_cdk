@@ -1,0 +1,29 @@
+pipelines:
+  - name: "frontend"
+    bucket_name: "frontend-artifact-bucket"
+    stages:
+      - name: "Source"
+        action_name: "CodeCommit_Source"
+        repo_name: "frontend"
+        branch: "master"
+
+      - name: "Build"
+        action_name: "Build_Frontend"
+        project_name: "frontend"
+  - name: "backend"
+    bucket_name: "backend-artifact-bucket"
+    stages:
+      - name: "Source"
+        action_name: "CodeCommit_Source"
+        repo_name: "backend"
+        branch: "master"
+
+      - name: "Build"
+        action_name: "Build_Backend"
+        project_name: "backend"
+
+      - name: "Deploy"
+        action_name: "DeployToEC2ECS"
+        service_name: "backend_service"
+        cluster_name: "ecs-ec2-cluster"
+        vpc_name: "task_vpc"

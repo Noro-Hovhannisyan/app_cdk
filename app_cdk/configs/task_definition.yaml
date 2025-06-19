@@ -1,0 +1,12 @@
+task_definitions:
+  - name: "backend"
+    role_arn: "arn:aws:iam::713767909258:role/ecsTaskExecutionRole-1"
+    network_mode: "BRIDGE"
+    image: "713767909258.dkr.ecr.eu-north-1.amazonaws.com/backend:latest"
+    memory_limit_mib: 256
+    cpu: 256
+    container_port: 8000
+    host_port: 0
+    protocol: "TCP"
+    port_name: "backend-8000"
+    app_protocol: http

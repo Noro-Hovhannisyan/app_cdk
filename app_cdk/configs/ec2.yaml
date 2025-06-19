@@ -1,0 +1,14 @@
+instances:
+  - name: "DB"
+    assumed_by: "ec2.amazonaws.com"
+    managed_policies: "AmazonSSMManagedInstanceCore"
+    ami: "ami-09516355bded22b02"
+    region: "eu-north-1"
+    instance_type: "t3.micro"
+    vpc_name: "task_vpc"
+    sg_id: "sg-000bd9634b6ac0faf"
+    subnet_type: "PRIVATE_ISOLATED"
+    key_name: "EC2 Tutorial"
+    device_name: "/dev/xvda"
+    volume_size: 20
+    encrypted: True

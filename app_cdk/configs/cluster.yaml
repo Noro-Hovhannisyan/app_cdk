@@ -1,0 +1,16 @@
+clusters:
+  - name: "ecs-ec2-cluster"
+    role_arn: "arn:aws:iam::713767909258:instance-profile/ECS-EC2-Cluster-8"
+    vpc_name: "task_vpc"
+    instance_type: "t3.micro"
+    machine_image: ecs.EcsOptimizedImage.amazon_linux2()
+    min_capacity: 1
+    max_capacity: 5
+    key_name: "EC2 Tutorial"
+    sg_id: "sg-0bfef69975d32af0e"
+    associate_public_ip_address: True
+    subnet_type: PUBLIC
+    capacity_provider_name: "my-capacity-provider"
+    enable_managed_scaling: False
+    enable_managed_termination_protection: False
+    machine_image_type: ecs.MachineImageType.AMAZON_LINUX_2

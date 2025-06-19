@@ -1,0 +1,18 @@
+all_vpc:
+  - name: 'task_vpc'
+    cidr: '192.168.0.0/16'
+    nat_gateways: 0
+    max_azs: 3
+    subnet-configuration:
+
+    - name: 'public-subnet'
+      subnet_type: "PUBLIC"
+      cidr_mask: 24
+
+    - name: 'private-subnet'
+      subnet_type: "PRIVATE_WITH_EGRESS"
+      cidr_mask: 24
+
+    - name: 'isolated-subnet'
+      subnet_type: "PRIVATE_ISOLATED"
+      cidr_mask: 24

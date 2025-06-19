@@ -1,0 +1,15 @@
+balancers:
+  - name: "task-alb"
+    vpc_name: "task_vpc"
+    sg_id: "sg-0a714d1c1fe6814ed"
+    internet_facing: True
+    listeners:
+      - port: 443
+        target_group_arn: "arn:aws:elasticloadbalancing:eu-north-1:713767909258:targetgroup/backend-tg/9324bebe40161615"
+        hosted_zone_id: "Z03054271SZN0HSASJEI7"
+        zone_name: "academy.goya.am"
+        domain_name: "flask.academy.goya.am"
+        region: "eu-north-1"
+      - port: 80
+        protocol: "HTTPS"
+        action_port: "443"

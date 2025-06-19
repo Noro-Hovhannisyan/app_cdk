@@ -1,0 +1,30 @@
+s3_buckets:
+  - name: frontend-react
+    block_public_acls: False
+    ignore_public_acls: False
+    restrict_public_buckets: False
+    block_public_policy: False
+    public_read_access: True
+    website_index_document: index.html
+    removal_policy: DESTROY
+    auto_delete_objects: True
+    notification:
+      - name: s3_lambda_cdn
+        lambda_name: invalidation_lambda
+        suffix: index.html
+  - name: frontend-artifact-bucket
+    block_public_acls: True
+    ignore_public_acls: True
+    restrict_public_buckets: True
+    block_public_policy: True
+    public_read_access: False
+    removal_policy: RETAIN
+    auto_delete_objects: False
+  - name: backend-artifact-bucket
+    block_public_acls: True
+    ignore_public_acls: True
+    restrict_public_buckets: True
+    block_public_policy: True
+    public_read_access: False
+    removal_policy: RETAIN
+    auto_delete_objects: False

@@ -1,0 +1,47 @@
+security_groups:
+  - name: "alb_sg"
+    description: 'ALB Security Group'
+    allow_all_outbound: True
+    ingress:
+      - description: HTTP
+        protocol: tcp
+        start_port: 80
+        end_port: 80
+        cidr: 0.0.0.0/0
+      - description: HTTPS
+        protocol: tcp
+        start_port: 443
+        end_port: 443
+        cidr: 0.0.0.0/0
+  - name: "ecs_ec2_cluster_sg"
+    description: 'Security Group for ECS Cluster'
+    allow_all_outbound: True
+    ingress:
+      - description: SSH to ECS Cluster
+        protocol: tcp
+        start_port: 22
+        end_port: 22
+        cidr: 0.0.0.0/0
+      - description: To ECS Cluster from ALB
+        protocol: tcp
+        start_port: 32768
+        end_port: 60999
+        src: alb_sg
+  - name: "db_sg"
+    description: 'DB Security Group'
+    allow_all_outbound: True
+    ingress:
+      - description: Back to DB
+        protocol: tcp
+        start_port: 5432
+        end_port: 5432
+        src: ecs_ec2_cluster_sg
+
+add_rules:
+      - name: "ecs_ec2_cluster_sg"
+        ingress:
+          - description: DB to Back
+            protocol: tcp
+            start_port: 32768
+            end_port: 60999
+            src: db_sg
